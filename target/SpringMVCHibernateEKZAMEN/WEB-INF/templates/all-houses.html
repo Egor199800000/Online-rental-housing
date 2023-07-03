@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <label style="margin-right: 1.5em" for="each"></label>
+        <table id="each">
+            <!--employee-это переменная иттерации-->
+            <!--для каждой переменной employee в результате оценки employeeList повторить фрагмент кода используя текущий элемент переменной employee     -->
+            <tr th:each="house: ${houses}">
+                <td th:text="${house.getPrice()}"></td>
+                <td th:text="${house.getAddress()}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
