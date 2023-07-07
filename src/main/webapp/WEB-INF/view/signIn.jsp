@@ -2,10 +2,9 @@
 <!doctype html>
 <html>
 <body>
-<h2>User info</h2>
+<h2>Sign in</h2>
 
 <form:form action="authorized" modelAttribute="user">
-
 
   <form:hidden path="id"/>
   <br><br>

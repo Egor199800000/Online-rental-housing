@@ -39,6 +39,7 @@ public class User {
     @NotBlank(message = "country is required field")
     @Column(name = "country ")
     private String country;
+
     @NotBlank(message = "city is required field")
     @Column(name = "city")
     private String city;
@@ -50,7 +51,7 @@ public class User {
 
 
     @CheckEmail
-    @NotBlank(message = "Filed is required field")
+    @NotBlank(message = "email is required field")
     @Column(name = "email")
     private String email;
 

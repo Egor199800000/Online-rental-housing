@@ -61,10 +61,8 @@ public class UserDaoImpl implements UserDao{
     @Override
     public List<User> getAllUsers() {
         Session session=sessionFactory.getCurrentSession();
-        System.out.println("getAllUsers НАЧАЛ РАБОТУ");
         Query<User> query=session.createQuery("from User", User.class);
         List<User> allUsers=query.getResultList();
-        System.out.println("ПОЛУЧИЛИ ЛИСТ ВСЕХ ЮЗЕРОВ");
         return allUsers;
     }
 
@@ -134,11 +132,5 @@ public class UserDaoImpl implements UserDao{
         List<House> allHousesOwnedByTheUser=query.getResultList();
         return allHousesOwnedByTheUser;
     }
-
-
-    //    @Override
-//    public boolean passwordAndMailAuthentication(String password, String email) {
-//        password=sessionFactory.getCurrentSession()
-//    }
 
 }

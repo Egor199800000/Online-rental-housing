@@ -10,7 +10,7 @@
   Address <form:input path="address"/>
   <form:errors path="address"/>
   <br><br>
-  Price <form:input path="price"/> per day
+  Price <form:input path="price"/>
   <form:errors path="price"/>
   <br><br>
   Description <form:input path="description"/>

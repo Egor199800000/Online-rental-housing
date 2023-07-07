@@ -12,7 +12,11 @@
 </head>
 <body>
 
-<h2>You already authorized</h2>
+<h2>No valid password or email</h2>
+
+     <br>
+    <input type="button" value="Back"
+           onclick="window.location.href='signIn'"/>
 
 </body>
 </html>

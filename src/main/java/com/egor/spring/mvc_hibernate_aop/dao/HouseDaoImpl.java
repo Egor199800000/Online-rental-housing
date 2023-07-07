@@ -1,14 +1,13 @@
 package com.egor.spring.mvc_hibernate_aop.dao;
 
 import com.egor.spring.mvc_hibernate_aop.entity.House;
-import com.egor.spring.mvc_hibernate_aop.sorting.PriceHouseComparator;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
+
 import java.util.List;
 
 @Repository("houseRep")
@@ -32,15 +31,6 @@ public class HouseDaoImpl implements HouseDao{
         }
         return allHouses;
     }
-
-//    @Override
-//    public List<House> getAllHousesByPriceAscending() {
-//        Session session=sessionFactory.getCurrentSession();
-//        Query<House> query=session.createQuery("from House", House.class);
-//        List<House> allHouses=query.getResultList();
-//       Collections.sort(allHouses,new PriceHouseComparator());
-//        return allHouses;
-//    }
 
     @Override
     public House getHouse(int id) {

@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-//TODO: что еще реализовать: SearchController, обработка исключений в JSON формате, попробовать реализовать aop-разделение рабочего функционала от бизнес логики
+//TODO: что еще реализовать: SearchController, Unit-тесты, exceptions+валидация данных, *попробовать реализовать aop-разделение рабочего функционала от бизнес логики
 
 import java.util.List;
 
@@ -53,31 +53,12 @@ public class HomeController {
 
 
     @RequestMapping("/logOut")
-    public String logOut(){
+    public String logOut(Model model){
         User user=userService.getAuthorizedUser();
-        if (user==null){
-            return "redirect:/";
-        }
         user.setAuthorized(false);
         userService.saveUser(user);
+        model.addAttribute("authUser",null);
         return "redirect:/";
     }
-
-
-
-
-//    @GetMapping("logOut/{id}")
-//    public String logOut(@PathVariable("id") int id,
-//                         RedirectAttributes redirectAttributes){
-//        User user=userService.getUser(id);
-//        user.setAuthorized(false);
-//        redirectAttributes.addAttribute("authUser",user.getName());
-//        userService.saveUser(user);
-//        return "redirect:/";
-//    }
-
-
-
-
 
 }

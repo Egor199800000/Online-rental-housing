@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,11 +21,11 @@ public class House {
     private int id;
 
     @Column(name = "address")
-    //@NotBlank(message = "address is required field")
+    @NotBlank(message = "address is required field")
     private String address;
 
+
     @Column(name = "price")
-    //@NotBlank(message = "price is required field")
     private int price;
 
     @Column(name = "is_rented")
@@ -32,8 +34,9 @@ public class House {
     @Column(name = "is_deleted")
     boolean isDeleted=false;////когда аккаунт владельца удален, вместе с этим блокируются объявления и арендованные дома становятся свободны
 
+
     @Column(name = "description_")
-    //@NotBlank(message = "description is required field")
+    @NotBlank(message = "description is required field")
     private String description;
 
 
@@ -48,4 +51,30 @@ public class House {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="tenant")
     private User tenant;//арендатор дома
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "address='" + address + '\'' +
+                ", price=" + price +
+                ", isRented=" + isRented +
+                ", isDeleted=" + isDeleted +
+                ", description='" + description + '\'' +
+                ", owner=" + owner +
+                ", tenant=" + tenant +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        House house = (House) o;
+        return id == house.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

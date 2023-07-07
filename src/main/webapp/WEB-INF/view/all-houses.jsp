@@ -13,9 +13,9 @@ Range by price houses
 <form action="priceRange">
 
   <input type="text" name="from" placeholder="from"/>
+  <input:errors path="from"/>
   <p></p>
   <input type="text" name="to" placeholder="to"/>
-
   <input type="submit"/>
 
 </form>
@@ -43,12 +43,7 @@ Range by price houses
     <input type="button" value="Sign in"
            onclick="window.location.href='signIn'"/>
   <br>
-    <form:form action="addNewHouse"  modelAttribute="authUser">
-      <c:url var="addNewHouse" value="addNewHouse">
-        <c:param name="authUserId" value="${authUser.id}"/>   <--внутри ссылка параметр с id-->
-      </c:url>
-      <input type="button" value="To add an advert" onclick="window.location.href='${addNewHouse}'">
-    </form:form>
+      <input type="button" value="To add an advert" onclick="window.location.href='addNewHouse'">
   <div>
   <br>
   <br>
