@@ -35,7 +35,7 @@ public class UserController {
         return "user-info";
     }
 
-//TODO обработать исключение
+
     @RequestMapping("/saveNewUser")
     public String saveUser(@Valid @ModelAttribute("user") User user,
                            BindingResult bindingResult){
@@ -43,12 +43,9 @@ public class UserController {
             return "user-info";
         }
 
-//        String email=user.getEmail();
-//        User otherUser=userService.getUserByEmail(email);
-//        if (otherUser!=null){
-//            System.err.println("ERROR BY EMAIL");
-//            return "email-error";
-//        }
+        //TODO обработать исключение
+        String email=user.getEmail();
+        userService.isUniqueEmail(email);
 
         user.setDeleted(false);
         user.setEnable(true);
@@ -73,8 +70,7 @@ public class UserController {
     }
 
     @PostMapping("authorized") //action
-    public String authorized(@Valid @ModelAttribute("user") User user,
-                             BindingResult bindingResult,
+    public String authorized(@ModelAttribute("user") User user,
                              Model model){
         User user1=null;
         User user2=null;
@@ -101,7 +97,6 @@ public class UserController {
 
     @GetMapping("/ownerInfo") //-кнопка
     public String OwnerInformation(@RequestParam("houseId") int id,Model model){
-//сюда должны попасть id дома который мы смотрим
         House house=houseService.getHouse(id);
         User user=house.getOwner();
         System.err.println(user.getName()+" -owner");
@@ -110,16 +105,12 @@ public class UserController {
     }
 
 
-    //вывод имени авторизованного юзера
-    @RequestMapping("profileUser") //-action
-    public String profileButton( @ModelAttribute("authUser") User user){
-        return "profile";
-    }
-
-    //профиль юзера
     @RequestMapping("/profile")
     public String profile(Model model){
         User user=userService.getAuthorizedUser();
+       if (user==null){
+           throw new NoAuthorizedUserException("Please log in first to see your account information");
+       }
         model.addAttribute("authUser",user);
         return "profile";
     }

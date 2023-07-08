@@ -3,12 +3,10 @@ package com.egor.spring.mvc_hibernate_aop.service;
 import com.egor.spring.mvc_hibernate_aop.dao.UserDao;
 import com.egor.spring.mvc_hibernate_aop.entity.House;
 import com.egor.spring.mvc_hibernate_aop.entity.User;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -116,12 +114,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public boolean isUniqueEmail(String email) {
         System.err.println(" isUniqueEmail НАЧАЛ РАБОТУ");
-        ArrayList<User> users= (ArrayList<User>) userDao.getAllUsers();
-        for (User u: users){
-            if (u.getEmail().equals(email)){
-                return false;
+                List<User> users=userDao.getAllUsers();
+        for (int i=0; i<users.size(); i++){
+            if ((users.get(i).getEmail()).equals(email)){
+                throw new RuntimeException("email not unique");
             }
         }
         return true;
