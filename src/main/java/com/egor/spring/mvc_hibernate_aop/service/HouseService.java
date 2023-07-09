@@ -10,6 +10,7 @@ import java.util.List;
 public interface HouseService {
 
     public List<House> getAllHouses();
+
     void saveHouse(House house);
 
    House getHouse(int id);

@@ -67,16 +67,20 @@ public class UserServiceImpl implements UserService{
             return false;
         }
     }
+
     @Override
     @Transactional
-    public User getRegisteredUserByPasswordAndEmail(String password, String email){
-        User user1= userDao.getUserByEmail(email);
-        User user2= userDao.getUserByPassword(password);
-        if (user1.getId()==user2.getId()){
-            System.err.println("Users equals");
-            return userDao.getUser(user1.getId());
+    public boolean isRegisteredUserByPasswordAndEmail(String password, String email){
+        try {
+            User user= userDao.getUserByEmail(email);
+            if (user.getPassword().equals(password)){
+                System.err.println("Users equals");
+                return true;
+            }
+        }catch (IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Incorrect login or password");
         }
-        return null;
+        return false;
     }
 
     @Override
@@ -116,7 +120,6 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public boolean isUniqueEmail(String email) {
-        System.err.println(" isUniqueEmail НАЧАЛ РАБОТУ");
                 List<User> users=userDao.getAllUsers();
         for (int i=0; i<users.size(); i++){
             if ((users.get(i).getEmail()).equals(email)){

@@ -6,24 +6,6 @@
 <html>
 
 <body>
-<br>
-<br>
-
-Range by price houses
-<form action="priceRange">
-
-  <input type="text" name="from" placeholder="from"/>
-  <input:errors path="from"/>
-  <p></p>
-  <input type="text" name="to" placeholder="to"/>
-  <input type="submit"/>
-
-</form>
-
-
-<br>
-<br>
-<br>
 
   <form:form action="profileUser"  modelAttribute="authUser">
     <c:url var="profileButton" value="profile">
@@ -48,13 +30,22 @@ Range by price houses
   <br>
   <br>
 
-    <p style="display:inline">
+ <p style="display:inline">
         <input type="button" value="sort by price asc"
                onclick="window.location.href='priceAsc'"/>
 
                    <input type="button" value="sort by price desc"
                           onclick="window.location.href='priceDesc'"/>
+<br>
     </p>
+    <br>
+                              <form action="priceRange">
+                                <input type="text" name="from" placeholder="price from"/>
+                                <input:errors path="from"/>
+                                <p></p>
+                                <input type="text" name="to" placeholder="price to"/>
+                                <input type="submit"/>
+                              </form>
 
   <br>
   <br>

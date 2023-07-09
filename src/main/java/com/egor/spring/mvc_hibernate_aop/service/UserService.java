@@ -32,7 +32,7 @@ public interface UserService {
 
      public boolean isAuthorizedUser(User user);
 
-     User getRegisteredUserByPasswordAndEmail(String password, String email);
-
     boolean isUniqueEmail(String email);
+
+     public boolean isRegisteredUserByPasswordAndEmail(String password, String email);
 }

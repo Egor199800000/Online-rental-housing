@@ -109,19 +109,16 @@ public class UserDaoImpl implements UserDao{
     @Override
     public User getAuthorizedUser() {
         Session session=sessionFactory.getCurrentSession();
-        Query<User> query=session.createQuery("from User", User.class);
+        String hql="from User where is_authorized= true";
+        Query<User> query=session.createQuery(hql, User.class);
         List<User> allUsers=query.getResultList();
-        User user=null;
-        for (int i=0;i<allUsers.size();){
-            user=allUsers.get(i);
-            if (user.isAuthorized()){
-                System.err.println(user.getName()+" authorized user");
-                return user;
-            }
-            i++;
+        if (!allUsers.isEmpty()){
+            User user=allUsers.get(0);
+            return user;
         }
         return null;
     }
+
 
     @Override
     public List<House> getAllHousesOwnedByTheUser(User user) {

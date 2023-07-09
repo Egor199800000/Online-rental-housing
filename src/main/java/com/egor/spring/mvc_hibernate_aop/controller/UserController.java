@@ -4,7 +4,6 @@ import com.egor.spring.mvc_hibernate_aop.entity.House;
 import com.egor.spring.mvc_hibernate_aop.entity.User;
 import com.egor.spring.mvc_hibernate_aop.exceptionHandling.AlreadyAuthorizedException;
 import com.egor.spring.mvc_hibernate_aop.exceptionHandling.NoAuthorizedUserException;
-import com.egor.spring.mvc_hibernate_aop.exceptionHandling.NoSuchEntityException;
 import com.egor.spring.mvc_hibernate_aop.service.HouseService;
 import com.egor.spring.mvc_hibernate_aop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +41,6 @@ public class UserController {
         if (bindingResult.hasErrors()){
             return "user-info";
         }
-
-        //TODO обработать исключение
         String email=user.getEmail();
         userService.isUniqueEmail(email);
 
@@ -69,7 +66,8 @@ public class UserController {
         return "signIn";
     }
 
-    @PostMapping("authorized") //action
+
+    @PostMapping("authorized")
     public String authorized(@ModelAttribute("user") User user,
                              Model model){
         User user1=null;
@@ -81,7 +79,6 @@ public class UserController {
              throw new IndexOutOfBoundsException("Incorrect login or password");
         }
 
-
         if (user1.getId()==user2.getId()){
             System.out.println("Users equals");
             user=userService.getUser(user1.getId());
@@ -92,6 +89,26 @@ public class UserController {
         }
         return "redirect:/";
     }
+
+
+    //TODO: на проработку-меннее ресурсоемкий способ авторизации
+//    @RequestMapping("authorized") //action
+//    public String authorized(@ModelAttribute("user") User user,
+//                             Model model){
+//try {
+//    if (userService.isRegisteredUserByPasswordAndEmail(user.getPassword(),user.getEmail())){
+//        User authUser=userService.getUser(user.getId());
+//
+//        authUser.setAuthorized(true);
+//        userService.saveUser(authUser);
+//        model.addAttribute("authUser",authUser);
+//        return "success";
+//    }
+//}catch (IndexOutOfBoundsException i){
+//    throw new IndexOutOfBoundsException("Incorrect login or password");
+//}
+//        return "redirect: /";
+//    }
 
 
 
