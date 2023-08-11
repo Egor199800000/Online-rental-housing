@@ -38,6 +38,9 @@ public class HouseServiceImpl implements HouseService{
     @Transactional
     public void deleteHouse(int id) {
         House house=houseDao.getHouse(id);
-houseDao.deleteHouse(house);
+        house.setRented(false);
+        house.setDeleted(true);
+        houseDao.saveHouse(house);
     }
+
 }

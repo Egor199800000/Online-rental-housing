@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,7 +57,6 @@ public class HouseController {
         return "redirect:/";
     }
 
-    //TODO:Доработать
     @RequestMapping("rentAHouse") //-кнопка
     public String rent(@RequestParam("houseId") int id, Model model){
 //сюда должны попасть id дома который мы смотрим
@@ -68,6 +66,14 @@ public class HouseController {
         model.addAttribute("rentAHouse",house);
         model.addAttribute("tenant",user);
         return "rent";
+    }
+
+//TODO: доработать-удаление дома и возврат на стр мои-дома
+
+    @RequestMapping("deleteHouse")
+    public String deleteHouse(@RequestParam("houseId") int id){
+        houseService.deleteHouse(id);
+        return "redirect:/myHouses";
     }
 
 }

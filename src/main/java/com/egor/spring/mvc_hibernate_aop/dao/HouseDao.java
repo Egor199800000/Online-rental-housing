@@ -14,6 +14,4 @@ public interface HouseDao {
     House getHouse(int id);
 
     void saveHouse(House house);
-
-    void deleteHouse(House house);//удаление дома, isDeleted=true, isRented=true
 }

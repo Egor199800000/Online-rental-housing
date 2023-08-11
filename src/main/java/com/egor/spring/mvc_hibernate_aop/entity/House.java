@@ -32,7 +32,10 @@ public class House {
     boolean isRented=false;//арендован или нет
 
     @Column(name = "is_deleted")
-    boolean isDeleted=false;////когда аккаунт владельца удален, вместе с этим блокируются объявления и арендованные дома становятся свободны
+    boolean isDeleted=false;
+//когда аккаунт владельца удален,
+//вместе с этим блокируются объявления-они не отображаются пользователям
+//и арендованные дома становятся свободны
 
 
     @Column(name = "description_")
@@ -40,7 +43,6 @@ public class House {
     private String description;
 
 
-    //private byte[] imgPath;//путь к изображениям
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="owner_")

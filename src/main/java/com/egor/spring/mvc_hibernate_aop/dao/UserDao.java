@@ -16,8 +16,6 @@ public interface UserDao{
 
      void saveUser(User user);//регистрация происходит сразу, если isEnable=false, то не открывается стартовая страница
 
-    void deleteUser(User user);//пользователь может удалить аккаунт isDeleted=true, вместе с этим удаляются его объявления и арендованные дома становятся свободны
-
     User getUserByPassword(String password);
 
     //boolean passwordAndMailAuthentication(String password, String email);

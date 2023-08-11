@@ -5,7 +5,7 @@ package com.egor.spring.mvc_hibernate_aop.entity;
 //рейтинг, который выставляется каждой стороной после завершения
 //аренды. Рейтинг варьируется от 1–5 звезд
 
-import com.egor.spring.mvc_hibernate_aop.valiation.CheckEmail;
+import com.egor.spring.mvc_hibernate_aop.validation.CheckEmail;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -69,7 +69,8 @@ public class User {
     private boolean isEnable=true;//подтвержден ли аккаунт
 
     @Column(name = "is_deleted")
-    boolean isDeleted=false;//когда аккаунт удален
+    private boolean isDeleted=false;
+//когда аккаунт удален, дома владельца так же должны быть в удаленном состоянии
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "is_authorized")

@@ -51,7 +51,9 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public void deleteUser(int id) {
         User user=userDao.getUser(id);
-        userDao.deleteUser(user);
+        user.setDeleted(true);
+        user.setAuthorized(false);
+        userDao.saveUser(user);
     }
 
     @Override
@@ -134,4 +136,5 @@ public class UserServiceImpl implements UserService{
     public List<House> getAllHousesOwnedByTheUser(User user) {
        return userDao.getAllHousesOwnedByTheUser(user);
     }
+
 }

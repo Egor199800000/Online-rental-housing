@@ -66,17 +66,6 @@ public class UserDaoImpl implements UserDao{
         return allUsers;
     }
 
-
-
-
-    @Override
-    public void deleteUser(User user) {
-        Session session=sessionFactory.getCurrentSession();
-        user.setEnable(false);
-        user.setDeleted(true);
-        session.merge(user);
-    }
-
     @Override
     public void addHouseToListHousesOwner(House house, User user){
         Session session=sessionFactory.getCurrentSession();

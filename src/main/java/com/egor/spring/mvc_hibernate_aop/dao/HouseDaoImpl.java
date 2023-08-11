@@ -24,7 +24,7 @@ public class HouseDaoImpl implements HouseDao{
     @Override
     public List<House> getAllHouses() {
         Session session=sessionFactory.getCurrentSession();
-        Query<House> query=session.createQuery("from House", House.class);
+        Query<House> query=session.createQuery("from House where is_deleted=false", House.class);
         List<House> allHouses=query.getResultList();
         for (int i=0;i<allHouses.size();i++){
             System.err.println(allHouses.get(i).getOwner().getName());
@@ -42,14 +42,6 @@ public class HouseDaoImpl implements HouseDao{
     @Override
     public void saveHouse(House house) {
         Session session= sessionFactory.getCurrentSession();
-        session.merge(house);
-    }
-
-    @Override
-    public void deleteHouse(House house) {
-        Session session=sessionFactory.getCurrentSession();
-        house.setDeleted(true);
-        house.setRented(false);
         session.merge(house);
     }
 }

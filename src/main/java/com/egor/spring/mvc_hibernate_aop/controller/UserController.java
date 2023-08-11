@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -80,6 +81,9 @@ public class UserController {
         }
 
         if (user1.getId()==user2.getId()){
+            if (user1.isDeleted()){
+                throw new IndexOutOfBoundsException("Incorrect login or password");
+            }
             System.out.println("Users equals");
             user=userService.getUser(user1.getId());
             user.setAuthorized(true);
@@ -89,28 +93,6 @@ public class UserController {
         }
         return "redirect:/";
     }
-
-
-    //TODO: на проработку-меннее ресурсоемкий способ авторизации
-//    @RequestMapping("authorized") //action
-//    public String authorized(@ModelAttribute("user") User user,
-//                             Model model){
-//try {
-//    if (userService.isRegisteredUserByPasswordAndEmail(user.getPassword(),user.getEmail())){
-//        User authUser=userService.getUser(user.getId());
-//
-//        authUser.setAuthorized(true);
-//        userService.saveUser(authUser);
-//        model.addAttribute("authUser",authUser);
-//        return "success";
-//    }
-//}catch (IndexOutOfBoundsException i){
-//    throw new IndexOutOfBoundsException("Incorrect login or password");
-//}
-//        return "redirect: /";
-//    }
-
-
 
     @GetMapping("/ownerInfo") //-кнопка
     public String OwnerInformation(@RequestParam("houseId") int id,Model model){
@@ -131,5 +113,31 @@ public class UserController {
         model.addAttribute("authUser",user);
         return "profile";
     }
+
+
+
+    @RequestMapping("/myHouses")
+    public String myHouses(Model model){
+        User user=userService.getAuthorizedUser();
+        List<House> houseList=user.getHouses();
+        model.addAttribute("authUser",user);
+        model.addAttribute("myHouses",houseList);
+        return "my-houses";
+    }
+
+
+    @RequestMapping("/deleteAccount")
+    public String deleteAccount(Model model){
+        User user=userService.getAuthorizedUser();
+        userService.deleteUser(user.getId());
+        List<House> houseList=user.getHouses();
+        for (House house: houseList){
+            houseService.deleteHouse(house.getId());
+        }
+        model.addAttribute("authUser",user);
+        return "redirect: /";
+    }
+
+
 
 }

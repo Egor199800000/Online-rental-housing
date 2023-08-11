@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-//TODO: что еще реализовать: SearchController, Unit-тесты, exceptions+валидация данных, *попробовать реализовать aop-разделение рабочего функционала от бизнес логики
+
 
 import java.util.List;
 
@@ -36,12 +36,9 @@ public class HomeController {
 
     @RequestMapping("/showDetails")
     public String houseInfo(@RequestParam("houseId") int id, Model model){
-//вбю-house-info; аттрибут- "houseDescr"
         House house=houseService.getHouse(id);
-        //model.addAttribute("id", id);
         model.addAttribute("houseDescr",house);
         return "house-info";
-//<form:form action="showDetails" modelAttribute="houseDescr">
     }
 
     @RequestMapping("/homePage")

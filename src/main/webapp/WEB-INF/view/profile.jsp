@@ -41,6 +41,16 @@
 <form:form action="logOut" modelAttribute="authUser">
     <input type="submit" value="logOut">
 </form:form>
+<br>
+<br>
+<form:form action="myHouses" modelAttribute="myHouses">
+    <input type="submit" value="myHouses">
+</form:form>
+<br>
+<br>
+<form:form action="deleteAccount" modelAttribute="authUser">
+    <input type="submit" value="Delete account">
+</form:form>
 
 </body>
 </html>

@@ -39,6 +39,8 @@
 <br>
     </p>
     <br>
+    Select price range
+    <br>
                               <form action="priceRange">
                                 <input type="text" name="from" placeholder="price from"/>
                                 <input:errors path="from"/>

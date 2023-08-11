@@ -1,4 +1,4 @@
-package com.egor.spring.mvc_hibernate_aop.valiation;
+package com.egor.spring.mvc_hibernate_aop.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
